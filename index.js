@@ -10,7 +10,14 @@ const questionRouter = require("./routes/questions");
 const app = express();
 app.use(express.json());
 
-app.use(cors());
+const cors = require("cors");
+
+app.use(
+  cors({
+    origin: "https://frontend-g866.vercel.app",
+    credentials: true,
+  }),
+);
 
 app.get("/", (req, res) => {
   res.send("API is running ");
