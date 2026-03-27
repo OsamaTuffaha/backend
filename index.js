@@ -10,7 +10,7 @@ const questionRouter = require("./routes/questions");
 const app = express();
 app.use(express.json());
 
-const cors = require("cors");
+
 
 app.use(
   cors({
@@ -18,6 +18,8 @@ app.use(
     credentials: true,
   }),
 );
+console.log('hello');
+
 
 app.get("/", (req, res) => {
   res.send("API is running ");
