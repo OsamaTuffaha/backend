@@ -1,16 +1,24 @@
 const { Pool } = require("pg");
-const connectionString = process.env.DATABASE_URL;
 
 const pool = new Pool({
-  connectionString
+  connectionString: process.env.DATABASE_URL,
+  ssl: {
+    rejectUnauthorized: false,
+  },
 });
 
-pool
-  .connect()
-  .then(() => {
-    console.log("db connected successfuly");
-  })
-  .catch((err) => {
-    console.log(err);
-  });
+// اتصال أولي (للتأكد)
+pool.connect()
+  .then(() => console.log("DB connected ✅"))
+  .catch(err => console.error(err));
+
+// events
+pool.on("connect", () => {
+  console.log("New DB connection 🔥");
+});
+
+pool.on("error", (err) => {
+  console.error("Unexpected DB error", err);
+});
+
 module.exports = pool;
