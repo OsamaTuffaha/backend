@@ -7,12 +7,7 @@ const pool = new Pool({
   },
 });
 
-// اتصال أولي (للتأكد)
-pool.connect()
-  .then(() => console.log("DB connected ✅"))
-  .catch(err => console.error(err));
 
-// events
 pool.on("connect", () => {
   console.log("New DB connection 🔥");
 });
